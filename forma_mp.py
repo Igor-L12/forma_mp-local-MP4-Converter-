@@ -3,10 +3,8 @@ from tkinter import filedialog, messagebox
 from moviepy import *
 import os
 
-
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
-
 
 def mp4_to_mp3(mp4, mp3):
     audio = AudioFileClip(mp4)
