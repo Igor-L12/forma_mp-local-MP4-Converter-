@@ -27,25 +27,29 @@ def browse_file():
 def convert():
     path = file_path.get()
     if not path.lower().endswith(".mp4"):
-        messagebox.showerror("Ошибка", "Выберите файл с расширением .mp4")
-        return
-    
-    choice = format_choice.get()
-    if choice == "mp3":
-        output = path[:-4] + ".mp3"
-        mp4_to_mp3(path, output)
-    elif choice == "gif":
-        output = path[:-4] + ".gif"
-        mp4_to_gif(path, output)
-    elif choice == "avi":
-        output = path[:-4] + ".avi"
-        mp4_to_avi(path, output)
-    else:
-        messagebox.showerror("Ошибка", "Выберите формат конвертации!")
+        messagebox.showerror("Ошибка", "Выберите .mp4 файл")
         return
 
-    messagebox.showinfo("Готово", f"Файл сохранён как:\n{output}")
-    open_folder(output)
+    choice = format_choice.get()
+    try:
+        if choice == "mp3":
+            output = path[:-4] + ".mp3"
+            mp4_to_mp3(path, output)
+        elif choice == "gif":
+            output = path[:-4] + ".gif"
+            mp4_to_gif(path, output)
+        elif choice == "avi":
+            output = path[:-4] + ".avi"
+            mp4_to_avi(path, output)
+        else:
+            messagebox.showerror("Ошибка", "Выберите формат")
+            return
+
+        messagebox.showinfo("Готово", f"Файл сохранён:\n{output}")
+        open_folder(output)
+
+    except Exception as e:
+        messagebox.showerror("Ошибка конвертации", f"{e}")
 
 def open_folder(output_path):
     """Открывает папку с результатом"""
